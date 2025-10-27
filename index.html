@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hyper-Reactive Universe Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Howler.js for audio -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+  </head>
+  <body class="h-screen w-screen overflow-hidden">
+    <!-- 3D Universe Canvas -->
+    <canvas id="universeCanvas"></canvas>
+
+    <!-- Data Visualization Overlay -->
+    <div
+      class="absolute top-4 left-4 w-96 h-64 glassmorphism rounded-xl p-4 border border-cyan-500/30"
+    >
+      <h2 class="text-lg font-bold mb-2 text-cyan-400 neon-text">
+        ENERGY FLUX MONITOR
+      </h2>
+      <div class="h-48">
+        <canvas id="energyChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Control Panel -->
+    <div
+      class="absolute top-4 right-4 w-80 glassmorphism rounded-xl p-6 border border-purple-500/30"
+    >
+      <h2 class="text-xl font-bold mb-4 text-purple-400 neon-text">
+        UNIVERSE CONTROL
+      </h2>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm mb-2 text-cyan-300">Particle Speed</label>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="50"
+            class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+            id="particleSpeed"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm mb-2 text-cyan-300">Core Rotation</label>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="30"
+            class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+            id="coreRotation"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm mb-2 text-cyan-300">Color Theme</label>
+          <div class="flex space-x-2">
+            <button
+              class="flex-1 py-2 bg-blue-500/20 hover:bg-blue-500/40 rounded transition-all-smooth text-blue-300 neon-glow"
+              data-theme="quantum"
+            >
+              Quantum
+            </button>
+            <button
+              class="flex-1 py-2 bg-red-500/20 hover:bg-red-500/40 rounded transition-all-smooth text-red-300 neon-glow"
+              data-theme="neon"
+            >
+              Neon
+            </button>
+            <button
+              class="flex-1 py-2 bg-green-500/20 hover:bg-green-500/40 rounded transition-all-smooth text-green-300 neon-glow"
+              data-theme="cyber"
+            >
+              Cyber
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-cyan-300">Ambient Sound</span>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" class="sr-only peer" id="soundToggle" />
+            <div
+              class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-600"
+            ></div>
+          </label>
+        </div>
+
+        <button
+          id="neuralMode"
+          class="w-full py-2 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 rounded-lg transition-all-smooth text-white font-bold pulse-glow"
+        >
+          ACTIVATE NEURAL MODE
+        </button>
+      </div>
+    </div>
+
+    <!-- AI Terminal -->
+    <div
+      class="absolute bottom-4 left-4 right-4 h-48 glassmorphism rounded-xl p-4 border border-green-500/30 overflow-hidden"
+    >
+      <h2 class="text-lg font-bold mb-2 text-green-400 neon-text">
+        AI COMMAND LOG
+      </h2>
+      <div
+        id="terminal"
+        class="h-36 overflow-y-auto font-mono text-sm text-green-300"
+      >
+        <div class="mb-1">> System initialized...</div>
+        <div class="mb-1">> Loading universal constants...</div>
+        <div class="mb-1">> Establishing quantum entanglement...</div>
+      </div>
+      <div class="flex items-center mt-1">
+        <span class="text-green-400 mr-2">></span>
+        <span
+          id="typingCursor"
+          class="h-4 w-2 bg-green-400 inline-block"
+        ></span>
+      </div>
+    </div>
+
+    <!-- FPS Counter -->
+    <div class="absolute bottom-4 right-4 text-xs text-gray-400">
+      <span id="fpsCounter">FPS: 60</span>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
